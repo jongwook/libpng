@@ -2318,6 +2318,17 @@ png_handle_iTXt(png_structp png_ptr, png_infop info_ptr, png_uint_32 length)
 }
 #endif
 
+
+#ifdef PNG_READ_CgBI_SUPPORTED
+/* Note: this does not correctly handle chunks that are > 64K under DOS */
+void /* PRIVATE */
+png_handle_CgBI(png_structp png_ptr, png_infop info_ptr, png_uint_32 length)
+{
+	png_byte buf[8];	png_read_data(png_ptr, buf, 8);
+	png_ptr->using_CgBI_extension=1;
+}
+#endif
+
 /* This function is called when we haven't found a handler for a
    chunk.  If there isn't a problem with the chunk itself (ie bad
    chunk name, CRC, or a critical chunk), the chunk is silently ignored
@@ -2432,6 +2443,9 @@ png_handle_unknown(png_structp png_ptr, png_infop info_ptr, png_uint_32 length)
    info_ptr = info_ptr; /* Quiet compiler warnings about unused info_ptr */
 #endif
 }
+
+
+
 
 /* This function is called to verify that a chunk name is valid.
    This function can't have the "critical chunk check" incorporated

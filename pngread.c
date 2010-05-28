@@ -300,6 +300,9 @@ png_read_info(png_structp png_ptr, png_infop info_ptr)
 #ifdef PNG_READ_zTXt_SUPPORTED
       PNG_zTXt;
 #endif
+#ifdef PNG_READ_CgBI_SUPPORTED
+      PNG_CgBI;
+#endif      
       png_uint_32 length = png_read_chunk_header(png_ptr);
       PNG_CONST png_bytep chunk_name = png_ptr->chunk_name;
 
@@ -414,6 +417,10 @@ png_read_info(png_structp png_ptr, png_infop info_ptr)
 #ifdef PNG_READ_iTXt_SUPPORTED
       else if (!png_memcmp(chunk_name, png_iTXt, 4))
          png_handle_iTXt(png_ptr, info_ptr, length);
+#endif
+#ifdef PNG_READ_CgBI_SUPPORTED
+	  else if (!png_memcmp(chunk_name, png_CgBI, 4))
+         png_handle_CgBI(png_ptr, info_ptr, length);
 #endif
       else
          png_handle_unknown(png_ptr, info_ptr, length);
@@ -1351,6 +1358,13 @@ png_read_png(png_structp png_ptr, png_infop info_ptr,
 
    /* Read rest of file, and get additional chunks in info_ptr - REQUIRED */
    png_read_end(png_ptr, info_ptr);
+	
+#ifdef PNG_READ_CgBI_SUPPORTED
+   if(png_ptr->using_CgBI_extension) {
+      png_ptr->color_type=PNG_COLOR_TYPE_BGRA;
+      info_ptr->color_type=PNG_COLOR_TYPE_BGRA;
+   }
+#endif
 
    transforms = transforms; /* Quiet compiler warnings */
    params = params;

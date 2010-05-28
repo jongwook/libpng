@@ -231,7 +231,7 @@
 #define PNG_tIME PNG_CONST png_byte png_tIME[5] = {116,  73,  77,  69, '\0'}
 #define PNG_tRNS PNG_CONST png_byte png_tRNS[5] = {116,  82,  78,  83, '\0'}
 #define PNG_zTXt PNG_CONST png_byte png_zTXt[5] = {122,  84,  88, 116, '\0'}
-
+#define PNG_CgBI PNG_CONST png_byte png_CgBI[5] = { 67, 103,  66,  73, '\0'}
 
 /* Inhibit C++ name-mangling for libpng functions but not for system calls. */
 #ifdef __cplusplus
@@ -733,6 +733,11 @@ PNG_EXTERN void png_handle_tRNS PNGARG((png_structp png_ptr, png_infop info_ptr,
 
 #ifdef PNG_READ_zTXt_SUPPORTED
 PNG_EXTERN void png_handle_zTXt PNGARG((png_structp png_ptr, png_infop info_ptr,
+   png_uint_32 length));
+#endif
+	
+#ifdef PNG_READ_CgBI_SUPPORTED
+PNG_EXTERN void png_handle_CgBI PNGARG((png_structp png_ptr, png_infop info_ptr,
    png_uint_32 length));
 #endif
 

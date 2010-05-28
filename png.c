@@ -842,7 +842,7 @@ png_check_IHDR(png_structp png_ptr,
    }
 
    if (color_type < 0 || color_type == 1 ||
-       color_type == 5 || color_type > 6)
+       color_type == 5 )
    {
       png_warning(png_ptr, "Invalid color type in IHDR");
       error = 1;
@@ -851,7 +851,8 @@ png_check_IHDR(png_structp png_ptr,
    if (((color_type == PNG_COLOR_TYPE_PALETTE) && bit_depth > 8) ||
        ((color_type == PNG_COLOR_TYPE_RGB ||
          color_type == PNG_COLOR_TYPE_GRAY_ALPHA ||
-         color_type == PNG_COLOR_TYPE_RGB_ALPHA) && bit_depth < 8))
+         color_type == PNG_COLOR_TYPE_RGB_ALPHA  ||
+		 color_type == PNG_COLOR_TYPE_BGR_ALPHA  ) && bit_depth < 8))
    {
       png_warning(png_ptr, "Invalid color type/bit depth combination in IHDR");
       error = 1;

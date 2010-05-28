@@ -909,9 +909,11 @@ typedef png_info FAR * FAR * png_infopp;
 #define PNG_COLOR_TYPE_PALETTE  (PNG_COLOR_MASK_COLOR | PNG_COLOR_MASK_PALETTE)
 #define PNG_COLOR_TYPE_RGB        (PNG_COLOR_MASK_COLOR)
 #define PNG_COLOR_TYPE_RGB_ALPHA  (PNG_COLOR_MASK_COLOR | PNG_COLOR_MASK_ALPHA)
+#define PNG_COLOR_TYPE_BGR_ALPHA  7
 #define PNG_COLOR_TYPE_GRAY_ALPHA (PNG_COLOR_MASK_ALPHA)
 /* aliases */
 #define PNG_COLOR_TYPE_RGBA  PNG_COLOR_TYPE_RGB_ALPHA
+#define PNG_COLOR_TYPE_BGRA  PNG_COLOR_TYPE_BGR_ALPHA
 #define PNG_COLOR_TYPE_GA  PNG_COLOR_TYPE_GRAY_ALPHA
 
 /* This is for compression type. PNG 1.0-1.2 only define the single type. */
@@ -1461,6 +1463,10 @@ struct png_struct_def
 #ifdef PNG_IO_STATE_SUPPORTED
 /* New member added in libpng-1.4.0 */
    png_uint_32 io_state PNG_DEPSTRUCT;
+#endif
+	
+#ifdef PNG_READ_CgBI_SUPPORTED
+   png_uint_32 using_CgBI_extension;
 #endif
 };
 

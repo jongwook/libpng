@@ -1,0 +1,14 @@
+
+libpng with CgBI support.
+
+CgBI is Apple's proprietary extension, to the PNG image file format.
+
+This library is an extension to libpng supporting CgBI file format.
+
+The usage is basically identical to that of libpng, 
+
+Additionally, color_type returned by png_get_IHDR equals 7 if the opened PNG file is in CgBI format.
+
+Note that it does not byteswap the pixels.
+
+
